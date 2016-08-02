@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160802085615) do
+ActiveRecord::Schema.define(:version => 20160802123636) do
 
   create_table "bookings", :force => true do |t|
     t.time     "C_in"
@@ -37,8 +37,12 @@ ActiveRecord::Schema.define(:version => 20160802085615) do
     t.string   "email"
     t.string   "phone"
     t.integer  "balance"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["phone"], :name => "index_users_on_phone", :unique => true
 
 end

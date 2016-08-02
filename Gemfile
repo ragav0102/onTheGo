@@ -8,6 +8,8 @@ gem 'rails', '3.2.16'
 gem 'sqlite3' 
 
 gem 'bootstrap-sass', '2.1'
+gem 'test-unit'
+gem 'bcrypt-ruby', '3.0.1'
 
 
 # Gems used only for assets and not required
@@ -21,6 +23,10 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+group :development do
+  gem 'annotate', '2.5.0'
+end
+
 
 gem 'jquery-rails'
 
