@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  C_in: 2016-08-02 14:23:17
+  C_out: 2016-08-02 14:23:17
+  Guests: 1
+  Amount: 1
+
+two:
+  C_in: 2016-08-02 14:23:17
+  C_out: 2016-08-02 14:23:17
+  Guests: 1
+  Amount: 1

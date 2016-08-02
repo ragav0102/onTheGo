@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  address: MyString
+  max_guests: 1
+  Charge_day: 1
+  Ch_in: 2016-08-02 14:26:15
+  Ch_out: 2016-08-02 14:26:15
+
+two:
+  address: MyString
+  max_guests: 1
+  Charge_day: 1
+  Ch_in: 2016-08-02 14:26:15
+  Ch_out: 2016-08-02 14:26:15
