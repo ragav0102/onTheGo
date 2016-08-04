@@ -1,6 +1,7 @@
 OnTheGo::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :houses, only: [:create, :edit, :destroy]
 
   get "users/new"
   root to: 'static_pages#home'
@@ -8,7 +9,7 @@ OnTheGo::Application.routes.draw do
 
   match '/signup',  to: 'users#new'
   match '/help', to: 'static_pages#help'
-  match '/host', to: 'static_pages#host'
+  match '/host', to: 'houses#new'
   match '/contact', to: 'static_pages#contact'
   match '/about', to: 'static_pages#about'
 

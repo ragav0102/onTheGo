@@ -9,5 +9,7 @@ class CreateHouses < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :houses, [:address, :max_guests]
+
   end
 end

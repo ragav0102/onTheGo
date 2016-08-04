@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160803064113) do
+ActiveRecord::Schema.define(:version => 20160803103024) do
 
   create_table "bookings", :force => true do |t|
     t.time     "C_in"
@@ -28,8 +28,11 @@ ActiveRecord::Schema.define(:version => 20160803064113) do
     t.integer  "Charge_day"
     t.time     "Ch_in"
     t.time     "Ch_out"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "user_id"
+    t.string   "name"
+    t.boolean  "availability"
   end
 
   create_table "users", :force => true do |t|

@@ -2,18 +2,23 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  phone      :string(255)
-#  balance    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  phone           :string(255)
+#  balance         :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
   attr_accessible :balance, :email, :name, :phone, :password, :password_confirmation
   has_secure_password
+
+  has_many :houses, dependent: :destroy
 
 
   before_save { email.downcase! }

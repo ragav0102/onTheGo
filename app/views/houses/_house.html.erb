@@ -1,0 +1,16 @@
+<li>
+  <p ><strong><%= house.name %></strong></p>
+  <span class="content">Located at <%= house.address %><br/></span>
+
+  <span class="content">Can accomodate <%= pluralize(house.max_guests, "guest")%> and charges <%= pluralize(house.Charge_day, "Dollar")%> per day. <br/></span>
+  <% if house.availability %>
+  <span> Ready to be occupied. <br/></span>
+  <% else %>
+  <span> Currently unavailable. <br/></span>
+  <% end %>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(house.created_at) %> ago.
+  </span>
+
+</li>
+
