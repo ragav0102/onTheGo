@@ -1,8 +1,9 @@
-<li>
-  <p ><strong><%= house.name %></strong></p>
-  <span class="content">Located at <%= house.address %><br/></span>
 
-  <span class="content">Can accomodate <%= pluralize(house.max_guests, "guest")%> and charges <%= pluralize(house.Charge_day, "Dollar")%> per day. <br/></span>
+<li>
+  <strong><%= link_to house.name, house %></strong>
+  <span class="content">Located at <%= house.address %>
+  <% if house.place %>,<%= house.place %><% end %></span>
+  <span class="content"><br/>Can accomodate <%= pluralize(house.max_guests, "guest")%> and charges <%= pluralize(house.Charge_day, "Dollar")%> per day. <br/></span>
   <% if house.availability %>
   <span> Ready to be occupied. <br/></span>
   <% else %>
@@ -11,6 +12,13 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(house.created_at) %> ago.
   </span>
+   <span><% if current_user.admin?  %>
+    | <%= link_to "delete", house, method: :delete,
+                                  data: { confirm: "You sure?" }, remote: true, class: 'delete_house' %>
+  <% end %></span>
+  <% if house.pic? %><br/><br/>
+  <%= image_tag house.pic, size: "160x110"%>
+  <% end %>
 
 </li>
 

@@ -19,6 +19,9 @@
 
       <%= f.label :name, "Name it!" %>
       <%= f.text_field :name %>
+    
+      <%= f.label :place, "City" %>
+      <%= f.select :place, House::PLACES %>
 
       <%= f.label :address , "Where is it?"%>
       <%= f.text_field :address %>
@@ -29,11 +32,10 @@
       <%= f.label :Charge_day, "Charge/day (in $)" %>
       <%= f.number_field :Charge_day %>
 
-      <%= f.check_box :availability %>
-      <%= f.label :availability, "Currently available" %>
-
-      <%= f.file_field :picture %>
-      <%= f.label :picture, "Upload a pic" %>
+      <%= f.check_box :availability %><%= f.label :availability, "Currently available" %>
+      
+      <%= f.file_field :pic %>
+      <%= f.label :pic, "Upload a pic" %>
 
       <%= f.submit "Host!", class: "btn btn-large btn-primary" %>
     <% end %>

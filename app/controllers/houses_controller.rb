@@ -1,13 +1,16 @@
 class HousesController < ApplicationController
   
-  before_filter :signed_in_user, only: [:create, :edit, :destroy]
+  before_filter :signed_in_user, only: [:new,:create, :edit, :destroy, :index]
+
+
 
   def new
     @house = House.new
   end
 
   def show
-    @houses = House.find(params[:id])
+    @house = House.find(params[:id])
+
   end
 
   def create
@@ -21,6 +24,17 @@ class HousesController < ApplicationController
   end
 
   def destroy
+    if current_user == @user || current_user.admin?
+      House.find(params[:id]).destroy
+      flash[:success] = "Listing deleted!"
+      respond_to do |format|
+        format.html { redirect_to @user }
+        #format.json { head :no_content }
+        format.js   { render :layout => false }
+      end
+    else 
+      redirect_to current_user
+    end
   end
 
   def edit
@@ -28,6 +42,7 @@ class HousesController < ApplicationController
   end
 
   def index
+    @houses = House.paginate(page: params[:page])
   end
   
 

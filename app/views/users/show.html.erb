@@ -5,16 +5,18 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-      </h1>
+      </h1> 
     </section>
   </aside>
    <div class="span8">
     	<% if @user.houses.count > 0 %>
-      		<h3>Houses (<%= @user.houses.count %>)</h3>
+      		<h3 id =  "count_ajax" >Houses</h3>
       		<ol class="houses">
         		<%= render @houses %>
       		</ol>
       	<%= will_paginate @houses %>	
+        <% else %>
+        <p class = "houses">This user has not listed any houses. <br/>Try the others out here.</p>
     	<% end %>
   </div>
 </div>

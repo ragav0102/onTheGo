@@ -13,6 +13,8 @@
 #  user_id      :integer
 #  name         :string(255)
 #  availability :boolean
+#  pic          :string(255)
+#  place        :string(255)
 #
 
 require 'test_helper'

@@ -1,0 +1,7 @@
+<%= render @house %><br/><br/>
+
+<p> Owned by:</p>
+<p>
+  <%= link_to gravatar_for @house.user, @house.user %>
+  <strong><%= link_to @house.user.name, @house.user %> </strong> | <%= @house.user.phone %>
+</p> <br/>

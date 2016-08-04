@@ -12,12 +12,15 @@
 #  updated_at   :datetime         not null
 #  user_id      :integer
 #  name         :string(255)
-#  availability :boolean		  default(TRUE)
+#  availability :boolean
+#  pic          :string(255)
+#  place        :string(255)
 #
 
 class House < ActiveRecord::Base
-  attr_accessible :Ch_in, :Ch_out, :Charge_day, :address, :max_guests, :name, :availability
-
+  PLACES = ["Chennai", "Coimbatore", "Bengaluru"].freeze
+  attr_accessible :Ch_in, :Ch_out, :Charge_day, :address, :max_guests, :name, :availability, :pic, :PLACES, :place
+  mount_uploader :pic, PicUploader
   belongs_to :user
 
   validates :name, presence: true, length: { maximum: 30 }
@@ -25,9 +28,12 @@ class House < ActiveRecord::Base
   validates :address, presence: true, length: { maximum: 100 }
   validates :max_guests, presence: true, length: { maximum: 10, minimum: 1 }
   validates :Charge_day, presence: true
+  validates :place, presence: true
   #validates :availability, presence: true
 
   default_scope order: 'houses.max_guests ASC'
+
+
 
 
 end

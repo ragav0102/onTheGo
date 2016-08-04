@@ -1,15 +1,24 @@
 <% provide(:title, 'Home') %>
 
-
+<% if current_user.nil? %>
 <div class="center hero-unit">
   <h1>Welcome to onTheGo </h1>
 
   <h2>
-    This is the home page for the
+    We find houses for you 
     <a href="http://localhost:3000/about">onTheGo</a>
-    webpage
+
   </h2>
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+</div>
+<% end %>
+<div class="center hero-unit">
+  <h1>Find houses onTheGo </h1>
+  <h2>
+  	Click here and get started with finding houses waiting for you!
+  </h2>
+
+  <%= link_to "Browse houses", houses_path, class: "btn btn-large btn-primary" %>
 </div>
 <img alt="onTheGo" src="/assets/onTheGo.jpg" />
