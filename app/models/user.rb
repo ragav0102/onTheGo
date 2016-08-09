@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :houses, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 
 
   before_save { email.downcase! }
@@ -33,6 +34,33 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   after_validation { self.errors.messages.delete(:password_digest) }
+=begin
+  def book!(house)
+
+    if house.user.id != current_user
+      bookings.create!(house_id: house.id)
+      house.availability = false
+      redirect_to house
+    else
+      render house
+    end
+
+    house
+  end
+
+
+  def unbook!(house)
+    if @user == current_user && house.availability == false
+      Booking.find_by_house_id(house.id).destroy
+      house.availability = true
+      redirect_to house
+    end
+  end
+  
+=end
+  def booked?(house)
+    current_user.bookings.find_by_house_id(house.id)
+  end
 
   private
 

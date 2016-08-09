@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @houses = @user.houses.paginate(page: params[:page])
+    @booked_houses = Booking.select(:house_id).group(:house_id).having("user_id = 2")
 
   end
   
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       # Handle a successful update.
-      flash[:success] = "Your info has been updated! Sign in and continue.."
+      flash[:success] = "Your info has been updated!"
       sign_in @user
       redirect_to @user
     else  

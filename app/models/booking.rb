@@ -3,14 +3,20 @@
 # Table name: bookings
 #
 #  id         :integer          not null, primary key
-#  C_in       :time
-#  C_out      :time
-#  Guests     :integer
-#  Amount     :integer
+#  house_id   :integer
+#  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Booking < ActiveRecord::Base
-  attr_accessible :Amount, :C_in, :C_out, :Guests
+  attr_accessible :house_id, :user_id 
+
+  belongs_to :user
+  belongs_to :house
+
+  validates :user_id, presence: true
+  validates :house_id, presence: true
+
+
 end

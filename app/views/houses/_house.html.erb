@@ -1,13 +1,13 @@
-
+<div class = "center hero-unit">
 <li>
-  <strong><%= link_to house.name, house %></strong>
+  <h3><strong ><%= link_to house.name, house %></strong><br/></h3>
   <span class="content">Located at <%= house.address %>
   <% if house.place %>,<%= house.place %><% end %></span>
-  <span class="content"><br/>Can accomodate <%= pluralize(house.max_guests, "guest")%> and charges <%= pluralize(house.Charge_day, "Dollar")%> per day. <br/></span>
+  <span >Can accomodate <%= pluralize(house.max_guests, "guest")%> and charges <%= pluralize(house.Charge_day, "Dollar")%> per day. <br/></span>
   <% if house.availability %>
   <span> Ready to be occupied. <br/></span>
   <% else %>
-  <span> Currently unavailable. <br/></span>
+  <span> Currently <strong>Unavailable</strong>. <br/></span>
   <% end %>
   <span class="timestamp">
     Posted <%= time_ago_in_words(house.created_at) %> ago.
@@ -22,3 +22,4 @@
 
 </li>
 
+</div>

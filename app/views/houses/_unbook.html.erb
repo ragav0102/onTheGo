@@ -1,0 +1,4 @@
+			<%= form_for current_user.bookings.find_by_house_id(@booking.house_id) ,  method: :delete  do |f| %>
+		    
+		    <%= f.submit "Unbook", data: { confirm: "You sure you wanna Unbook?" }, class: "btn btn-large btn-primary" %>
+		  	<% end %> 

@@ -1,7 +1,27 @@
-<%= render @house %><br/><br/>
-
-<p> Owned by:</p>
-<p>
-  <%= link_to gravatar_for @house.user, @house.user %>
-  <strong><%= link_to @house.user.name, @house.user %> </strong> | <%= @house.user.phone %>
-</p> <br/>
+<div class ="row">
+  <aside class="span8">
+    
+    <%= render @house %>
+    <%= render 'book_form' if signed_in? %>
+  </aside>
+    <div class="span4">
+      <section>
+        <span> <strong>Owned by: </strong></span>
+        <p>
+          <%= link_to gravatar_for @house.user, @house.user %>
+          <strong><%= link_to @house.user.name, @house.user %> </strong> | <%= @house.user.phone %>
+        </p> 
+      </section>
+      <section>
+        <br/><br/><br/>
+          <span > <strong>Other houses owned by <%= @house.user.name %>:</strong></span>
+          <ul>
+            <% @house.user.houses.each do |h| %>
+              <% if h.name != @house.name%>
+                <li><%= link_to h.name, h %></li>
+              <% end %>
+            <% end %>
+          </ul>
+      </section>
+    </div>
+</div>

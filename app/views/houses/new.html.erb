@@ -2,7 +2,8 @@
 <h1>Host your house</h1>
 
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span8 offset2">
+    <div class = "center hero-unit">
     <%= form_for(@house) do |f| %>
       <% if @house.errors.any? %>
         <div id="error_explanation">
@@ -32,12 +33,14 @@
       <%= f.label :Charge_day, "Charge/day (in $)" %>
       <%= f.number_field :Charge_day %>
 
-      <%= f.check_box :availability %><%= f.label :availability, "Currently available" %>
+      <%= f.label :availability, "Currently available" %>
+      <%= f.check_box :availability %>
       
-      <%= f.file_field :pic %>
       <%= f.label :pic, "Upload a pic" %>
+      <%= f.file_field :pic %><br/>
 
       <%= f.submit "Host!", class: "btn btn-large btn-primary" %>
     <% end %>
+  </div>
   </div>
 </div>

@@ -1,0 +1,12 @@
+  <div class = "center">
+  <div id = "book_form">
+  <% if !@house.availability.nil?  && current_user.id != @house.user_id %> 
+	  <% if current_user.bookings.find_by_house_id(@house.id) && !@house.availability %>
+	  	<%= render 'unbook'%>
+	  <% elsif !@house.availability %>
+	  <% else %>
+	  	<%= render 'book'%>
+	  <% end %>
+  <% end %> 
+</div>
+</div>

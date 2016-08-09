@@ -22,6 +22,7 @@ class House < ActiveRecord::Base
   attr_accessible :Ch_in, :Ch_out, :Charge_day, :address, :max_guests, :name, :availability, :pic, :PLACES, :place
   mount_uploader :pic, PicUploader
   belongs_to :user
+  has_one :booking, foreign_key: "house_id", dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :user_id, presence: true
@@ -29,10 +30,14 @@ class House < ActiveRecord::Base
   validates :max_guests, presence: true, length: { maximum: 10, minimum: 1 }
   validates :Charge_day, presence: true
   validates :place, presence: true
-  #validates :availability, presence: true
+  validates :pic, presence: true
+  validates :availability, presence: true
 
   default_scope order: 'houses.max_guests ASC'
 
+  def self.search(search)
+    where("name LIKE ? OR address LIKE ? OR place LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
+  end
 
 
 

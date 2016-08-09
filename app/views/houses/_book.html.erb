@@ -1,0 +1,5 @@
+		  <%= form_for @booking ,  url: bookings_path do |f| %>
+		    <div><%= f.hidden_field :house_id %></div>
+		    <div><%= f.hidden_field :user_id %></div>
+		    <%= f.submit "Book", data: { confirm: "You sure you wanna book?" }, class: "btn btn-large btn-primary" %>
+		  <% end %>

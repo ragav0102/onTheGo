@@ -1,7 +1,9 @@
 OnTheGo::Application.routes.draw do
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :houses, only: [:create, :edit, :destroy,:index, :show]
+  resources :bookings, only: [:create, :destroy]
 
   get "users/new"
   root to: 'static_pages#home'

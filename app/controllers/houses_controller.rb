@@ -1,7 +1,7 @@
 class HousesController < ApplicationController
   
   before_filter :signed_in_user, only: [:new,:create, :edit, :destroy, :index]
-
+  before_filter :correct_user, only: :destroy
 
 
   def new
@@ -10,7 +10,7 @@ class HousesController < ApplicationController
 
   def show
     @house = House.find(params[:id])
-
+    @booking = Booking.new(house_id: @house.id, user_id: current_user.id)
   end
 
   def create
@@ -42,8 +42,19 @@ class HousesController < ApplicationController
   end
 
   def index
-    @houses = House.paginate(page: params[:page])
+    @houses = House.all
+    if params[:search]
+      @houses = House.search(params[:search]).order(created_at + " " + ASC).paginate( :per_page => 10, page: params[:page])  #.order("created_at DESC")
+    else
+      @houses = House.paginate( :per_page => 10, page: params[:page]).order("name DESC")
+    end
   end
-  
+
+  private
+
+    def correct_user
+      @house = current_user.houses.find_by_id(params[:id])
+      redirect_to root_url if @house.nil?
+    end  
 
 end

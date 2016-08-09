@@ -1,6 +1,7 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
+    #puts Dir.pwd
     admin = User.create!(name: "ragav",
                  email: "ragavh123@gmail.com",
                  phone: "9894172765",
@@ -25,7 +26,9 @@ namespace :db do
       address = Faker::Lorem.sentence(5),
       max_guests = 2
       cd = 1000
-      users.each { |user| user.houses.create!(name: name, address: address, max_guests: max_guests, Charge_day: cd, availability: true) }
+      users.each { |user| user.houses.create!(name: name, address: address, max_guests: max_guests, 
+        Charge_day: cd, availability: true, place: House::PLACES[n%3], 
+        pic: File.open("app/assets/images/agc_2013_int_content-img_beach-houses.jpg",'rb')) }
     end
 
   end
