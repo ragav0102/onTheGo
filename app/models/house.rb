@@ -35,8 +35,9 @@ class House < ActiveRecord::Base
 
   default_scope order: 'houses.max_guests ASC'
 
-  def self.search(search)
-    where("name LIKE ? OR address LIKE ? OR place LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
+  def self.search(search, city_name)
+    search ||= " "
+    where("place LIKE ? AND (name LIKE ? OR address LIKE ? OR place LIKE ?)", "%#{city_name}%" ,"%#{search}%", "%#{search}%", "%#{search}%") 
   end
 
 

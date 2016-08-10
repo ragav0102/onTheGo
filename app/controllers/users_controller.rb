@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @houses = @user.houses.paginate(page: params[:page])
-    @booked_houses = Booking.select(:house_id).group(:house_id).having("user_id = 2")
+    booked_ids = Booking.select("house_id").where(user_id: current_user.id)
+    b_ids = []
+    booked_ids.each{ |a| b_ids.push(a.house_id) }
+    @booked = House.find_all_by_id(b_ids)
+    #House.where("house_id IN (#{Booking.select("house_id").where(user_id: current_user.id)})")
 
   end
   

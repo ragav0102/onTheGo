@@ -1,25 +1,26 @@
 <div class = "center hero-unit">
 <li>
   <h3><strong ><%= link_to house.name, house %></strong><br/></h3>
-  <span class="content">Located at <%= house.address %>
-  <% if house.place %>,<%= house.place %><% end %></span>
+  <span class="content">Located at <%= house.address %>,<%= house.place %></span>
   <span >Can accomodate <%= pluralize(house.max_guests, "guest")%> and charges <%= pluralize(house.Charge_day, "Dollar")%> per day. <br/></span>
   <% if house.availability %>
-  <span> Ready to be occupied. <br/></span>
+    <span> Ready to be occupied. <br/></span>
   <% else %>
-  <span> Currently <strong>Unavailable</strong>. <br/></span>
+    <span> Currently <strong>Unavailable</strong>. </span>
+    <% if current_user == @user %>
+    <span>Booked by: <%= link_to User.find(Booking.find_by_house_id(house.id).user_id).name, User.find(Booking.find_by_house_id(house.id).user_id)%><br/></span>
+    <% else %><br/>
+    <% end %>
   <% end %>
   <span class="timestamp">
     Posted <%= time_ago_in_words(house.created_at) %> ago.
   </span>
-   <span><% if current_user.admin?  %>
-    | <%= link_to "delete", house, method: :delete,
-                                  data: { confirm: "You sure?" }, remote: true, class: 'delete_house' %>
-  <% end %></span>
-  <% if house.pic? %><br/><br/>
-  <%= image_tag house.pic, size: "160x110"%>
-  <% end %>
-
+  <span>
+    <% if current_user.admin? || current_user.id == house.user_id %>
+      | <%= link_to "delete", house, method: :delete,
+                                  data: { confirm: "You sure about removing the listing?" }, remote: true, class: 'delete_house' %>
+    <% end %>
+  </span>
+  <br/><br/><%= image_tag house.pic, size: "160x110"%>
 </li>
-
 </div>

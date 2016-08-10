@@ -7,10 +7,11 @@
         <%= @user.name %>
       </h1> 
     </section>
+    <%= render 'user_bookings' %>
   </aside>
    <div class="span8">
     	<% if @user.houses.count > 0 %>
-      		<h3 id ="count_ajax" >Houses</h3>
+      		<h3 id ="count_ajax" class = "center">Houses owned:</h3>
       		<ol class="houses">
         		<%= render @houses %>
       		</ol>
@@ -19,5 +20,5 @@
 
         <p class = "houses"> It's quite empty here. </p>
     	<% end %>
-  </div>
+   </div>
 </div>

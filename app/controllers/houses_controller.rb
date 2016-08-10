@@ -11,6 +11,7 @@ class HousesController < ApplicationController
   def show
     @house = House.find(params[:id])
     @booking = Booking.new(house_id: @house.id, user_id: current_user.id)
+
   end
 
   def create
@@ -43,10 +44,11 @@ class HousesController < ApplicationController
 
   def index
     @houses = House.all
+    params[:city_name] ||= "Chennai"
     if params[:search]
-      @houses = House.search(params[:search]).order(created_at + " " + ASC).paginate( :per_page => 10, page: params[:page])  #.order("created_at DESC")
+      @houses = House.search(params[:search],params[:city_name]).order("created_at DESC").paginate( :per_page => 10, page: params[:page])  #.order("created_at DESC")
     else
-      @houses = House.paginate( :per_page => 10, page: params[:page]).order("name DESC")
+      @houses = House.search(" ", params[:city_name]).paginate( :per_page => 10, page: params[:page]).order("name DESC")
     end
   end
 

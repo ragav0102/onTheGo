@@ -1,0 +1,14 @@
+<div class = "center hero-unit">
+	<div class = "navbar-form"><%= form_tag houses_path, method: :get do %>
+		<span class = "col col-50" style="width:50%">
+			<%= select_tag "city_name", "<option>Chennai</option><option>Coimbatore</option><option>Bengaluru</option>".html_safe%>
+		</span>	
+		<span class = "col col-50" style="color: red">
+			<%= text_field_tag :search, params[:search], placeholder: "Enter search string" %>
+		</span>
+		<%= button_tag(type: "submit", :class => "btn btn-medium ") do %>
+		  Search houses<i class="icon-search"></i>
+		<% end %> 
+	<% end %>
+	</div>
+</div>

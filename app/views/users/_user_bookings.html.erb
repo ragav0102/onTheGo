@@ -1,0 +1,10 @@
+<section>
+  <% if current_user == @user %>
+  <h4> Your bookings: </h4>
+    <ul>
+      <% @booked.each do |h|%>
+      <li>  <%= link_to h.name, h %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
