@@ -18,6 +18,15 @@ module SessionsHelper
     user == current_user
   end
 
+  def current_house
+    @house = House.find(params[:id])
+    @user = User.find(@house.user_id)
+  end
+
+  def user_page
+    @user = User.find(params[:id])
+  end
+
   def signed_in?
     !current_user.nil?
   end

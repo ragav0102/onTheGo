@@ -11,18 +11,5 @@ class StaticPagesController < ApplicationController
   def about 
   end
 
-  def contact
-  end
 
-  def g
-  end
-
-  def fb
-  end
-
-  def twitter
-  end
-
-  def in
-  end
 end

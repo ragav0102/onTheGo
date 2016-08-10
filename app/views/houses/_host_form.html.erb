@@ -1,0 +1,37 @@
+<%= form_for(@house) do |f| %>
+  <% if @house.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        You have <%= pluralize(@house.errors.count, "correction") %>.
+      </div>
+      <ul>
+      <% @house.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+  <%= f.label :name, "Name it!" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :place, "City" %>
+  <%= f.select :place, House::PLACES %>
+
+  <%= f.label :address , "Where is it?"%>
+  <%= f.text_field :address %>
+
+  <%= f.label :max_guests, "No. of Guests" %>
+  <%= f.number_field :max_guests %>
+
+  <%= f.label :Charge_day, "Charge/day (in $)" %>
+  <%= f.number_field :Charge_day %>
+
+  <%= f.label :availability, "Currently available" %>
+  <%= f.check_box :availability %>
+  
+  <%= f.label :pic, "Upload a pic" %>
+  <%= f.file_field :pic %><br/>
+
+  <%= f.submit "Host!", class: "btn btn-large btn-primary" %>
+<% end %>

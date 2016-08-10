@@ -3,6 +3,23 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= render 'sign_up_form' %>
+  	<%= form_for(@user) do |f| %>
+	  	<%= render 'shared/error_messages' %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :phone %>
+        <%= f.text_field :phone %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <%= f.label :password_confirmation, "Confirm pass" %>
+        <%= f.password_field :password_confirmation %>
+	    <%= f.submit "Take me in!", class: "btn btn-large btn-primary" %>
+	<% end %>
   </div>
 </div>

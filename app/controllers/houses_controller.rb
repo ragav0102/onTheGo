@@ -1,7 +1,8 @@
 class HousesController < ApplicationController
   
   before_filter :signed_in_user, only: [:new,:create, :edit, :destroy, :index]
-  before_filter :correct_user, only: :destroy
+  before_filter :correct_user, only: [:destroy, :edit]
+  before_filter :current_house, only: [:show,:destroy]
 
 
   def new
@@ -9,7 +10,7 @@ class HousesController < ApplicationController
   end
 
   def show
-    @house = House.find(params[:id])
+    #@house = House.find(params[:id])
     @booking = Booking.new(house_id: @house.id, user_id: current_user.id)
 
   end
@@ -25,25 +26,20 @@ class HousesController < ApplicationController
   end
 
   def destroy
-    if current_user == @user || current_user.admin?
-      House.find(params[:id]).destroy
+    if current_user.id == @user.id || current_user.admin?
+      @house.destroy
       flash[:success] = "Listing deleted!"
-      respond_to do |format|
-        format.html { redirect_to @user }
-        #format.json { head :no_content }
-        format.js   { render :layout => false }
-      end
+      redirect_to current_user
     else 
       redirect_to current_user
     end
   end
 
   def edit
-    @house = current_user.House.find(params[:id])
+
   end
 
   def index
-    @houses = House.all
     params[:city_name] ||= "Chennai"
     if params[:search]
       @houses = House.search(params[:search],params[:city_name]).order("created_at DESC").paginate( :per_page => 10, page: params[:page])  #.order("created_at DESC")

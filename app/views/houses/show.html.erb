@@ -14,14 +14,14 @@
       </section>
       <section>
         <br/><br/><br/>
-          <span > <strong>Other houses owned by <%= @house.user.name %>:</strong></span>
-          <ul>
-            <% @house.user.houses.each do |h| %>
-              <% if h.name != @house.name%>
-                <li><%= link_to h.name, h %></li>
-              <% end %>
+        <span > <strong>Other houses owned by <%= @house.user.name %>:</strong></span>
+        <ul>
+          <% @house.user.houses.each do |h| %>
+            <% if h.name != @house.name%>
+              <li><%= link_to h.name, h %></li>
             <% end %>
-          </ul>
+          <% end %>
+        </ul>
       </section>
     </div>
 </div>

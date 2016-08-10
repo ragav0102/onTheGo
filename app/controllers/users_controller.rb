@@ -2,17 +2,14 @@ class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:edit, :update,:index, :destroy]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: [:destroy, :index]
+  before_filter :user_page, only: [:show, :destroy]
 
 
   def show
-    @user = User.find(params[:id])
     @houses = @user.houses.paginate(page: params[:page])
-    booked_ids = Booking.select("house_id").where(user_id: current_user.id)
-    b_ids = []
-    booked_ids.each{ |a| b_ids.push(a.house_id) }
-    @booked = House.find_all_by_id(b_ids)
+    booked_ids = Booking.select("house_id").where(user_id: current_user.id).map(&:house_id)
+    @booked = House.find_all_by_id(booked_ids)
     #House.where("house_id IN (#{Booking.select("house_id").where(user_id: current_user.id)})")
-
   end
   
   def new
@@ -31,11 +28,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+
   end
 
   def update
-    @user = User.find(params[:id])
+
     if @user.update_attributes(params[:user])
       # Handle a successful update.
       flash[:success] = "Your info has been updated!"
@@ -51,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    @user.destroy
     flash[:success] = "User fired :D"
     redirect_to users_url
   end

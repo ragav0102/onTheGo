@@ -1,18 +1,17 @@
 <% provide(:title, 'Houses') %>
 <h1>Houses </h1>
+
 <%= render 'search_form' %>
-<div class = "center" >
-	<%= will_paginate %>
-</div>
-<ul class="users">
-  <%= render @houses %>
-</ul>
+
+<div class = "center" ><%= will_paginate %></div>
+
+<ul class="users"><%= render @houses %></ul>
+
 <% if @houses.blank? %>
 	<h4>Sorry.. There are no matches for <%= params[:search] %> in <%= params[:city_name] %>.</h4>
 <% end %>
-<div class = "center" >
-	<%= will_paginate %>
-</div>
+
+<div class = "center" >	<%= will_paginate %></div>
 
 
 
